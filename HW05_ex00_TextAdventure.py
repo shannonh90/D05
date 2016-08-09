@@ -6,6 +6,9 @@ from sys import exit
 
 # Body
 
+#onboarding
+username = input("What's your name? Let's play. ")
+
 
 def infinite_stairway_room(count=0):
     print("You walk through the door to see a dimly lit hallway.")
@@ -18,9 +21,14 @@ def infinite_stairway_room(count=0):
         if (count > 0):
             print("but you're not happy about it")
         infinite_stairway_room(count + 1)
-    # option 2 == ?????
+    # option 2 == 
     if next == option_2:
         pass
+    elif "turn" in next:
+        print("Going back to the cthulhu room")
+        cthulu_room()
+    else:
+        print("Taking you back to the start, %d" %username)
 
 
 def gold_room():
@@ -49,28 +57,29 @@ def bear_room():
     while True:
         next = input("> ")
 
-        if next == "take honey":
+        if "take" in next or "honey" in next:
             dead("The bear looks at you then slaps your face off.")
-        elif next == "taunt bear" and not bear_moved:
+        elif "taunt" in next and not bear_moved:
             print("The bear has moved from the door. You can go through it now.")
             bear_moved = True
-        elif next == "taunt bear" and bear_moved:
+        elif "taunt" in next and bear_moved:
             dead("The bear gets pissed off and chews your leg off.")
-        elif next == "open door" and bear_moved:
+        elif ("open" in next or "door" in next) and bear_moved:
             gold_room()
         else:
-            print("I got no idea what that means.")
+            print("I got no idea what that means. Take honey or taunt this guy?")
 
 
 def cthulhu_room():
     print("Here you see the great evil Cthulhu.")
     print("He, it, whatever stares at you and you go insane.")
-    print("Do you flee for your life or eat your head?")
+    print("Do you flee for your life or eat your head, %d?" %username)
 
     next = input("> ")
 
     if "flee" in next:
-        start()
+        print("You've seem to have found another day on your way out...")
+        infinite_stairway_room
     elif "head" in next:
         dead("Well that was tasty!")
     else:
